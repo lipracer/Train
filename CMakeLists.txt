@@ -8,10 +8,13 @@ project (LCTrain)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCES lib/train_test.cc lib/solution.cc)
+# set(SOURCES "lib/**.cc" "test/**.cc")
+
+FILE(GLOB SOURCES "lib/*.cc")
+FILE(GLOB TESTS "test/*.cc")
 
 # Add an executable
-add_executable(LCTrain ${SOURCES})
+add_executable(LCTrain ${SOURCES} ${TESTS})
 
 # Set the directories that should be included in the build command for this target
 # when running g++ these will be included as -I/directory/path/
