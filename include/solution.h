@@ -15,10 +15,12 @@ struct ListNode {
   ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-std::string toString(ListNode* list);
+std::string toString(ListNode *list);
 
 ListNode *addTwoNumbers(ListNode *l1, ListNode *l2);
 
 int lengthOfLongestSubstring(std::string s);
 
+double findMedianSortedArrays(const std::vector<int> &nums1,
+                              const std::vector<int> &nums2);
 }

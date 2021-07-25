@@ -5,13 +5,19 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <string>
+#include <tuple>
 
-using TestCaseFuncDef = std::function<void(void)>;
+using TestCaseFuncDef =
+    std::tuple<std::string, std::string, std::function<void(void)>>;
 
 extern std::vector<TestCaseFuncDef> gTestCases;
 
 struct TestCaseRegister {
-  TestCaseRegister(TestCaseFuncDef func) { gTestCases.emplace_back(func); }
+  TestCaseRegister(const std::string &ClassStr, const std::string &CaseStr,
+                   std::function<void(void)> func) {
+    gTestCases.emplace_back(ClassStr, CaseStr, func);
+  }
 };
 
 #define LL_FUNCTION_NAME(Class, Name) Class##Name
@@ -23,7 +29,10 @@ struct TestCaseRegister {
 
 #define TEST(Class, Name)                                                      \
   DECL_TEST_CASE_FUNC(Class, Name);                                            \
-TestCaseRegister UNIQUE_REG_NAME(__COUNTER__)(LL_FUNCTION_NAME(Class, Name));  \
+  \
+TestCaseRegister UNIQUE_REG_NAME(__COUNTER__)(#Class, #Name,                   \
+                                              LL_FUNCTION_NAME(Class, Name));  \
+  \
 void LL_FUNCTION_NAME(Class, Name)(void)
 
 #define EXPECT_EQ(lhs, rhs)

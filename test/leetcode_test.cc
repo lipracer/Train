@@ -45,3 +45,11 @@ TEST(LeetCodeTrain, lengthOfLongestSubstring) {
   std::cout << lengthOfLongestSubstring("bbbb") << std::endl;
   std::cout << lengthOfLongestSubstring("pwwkew") << std::endl;
 }
+
+TEST(LeetCodeTrain, findMedianSortedArrays) {
+  std::cout << findMedianSortedArrays({1, 3}, {2}) << std::endl;
+  std::cout << findMedianSortedArrays({1, 2}, {3, 4}) << std::endl;
+  std::cout << findMedianSortedArrays({0, 0}, {0, 0}) << std::endl;
+  std::cout << findMedianSortedArrays({}, {1}) << std::endl;
+  std::cout << findMedianSortedArrays({2}, {}) << std::endl;
+}
