@@ -53,3 +53,29 @@ TEST(LeetCodeTrain, findMedianSortedArrays) {
   std::cout << findMedianSortedArrays({}, {1}) << std::endl;
   std::cout << findMedianSortedArrays({2}, {}) << std::endl;
 }
+
+TEST(LeetCodeTrain, longestPalindrome) {
+  std::cout << longestPalindrome("babad") << std::endl;
+  std::cout << longestPalindrome("cbbd") << std::endl;
+  std::cout << longestPalindrome("a") << std::endl;
+  std::cout << longestPalindrome("ac") << std::endl;
+  std::cout << longestPalindrome("aacabdkacaa") << std::endl; 
+}
+
+TEST(LeetCodeTrain, convert) {
+  std::cout << convert("PAYPALISHIRING", 3) << std::endl;
+  std::cout << convert("PAYPALISHIRING", 4) << std::endl;
+  std::cout << convert("A", 1) << std::endl;
+  std::cout << convert("A", 2) << std::endl;
+  std::cout << convert("ABC", 2) << std::endl;
+}
+
+
+TEST(LeetCodeTrain, reverse) {
+  std::cout << reverse(123) << std::endl;
+  std::cout << reverse(-123) << std::endl;
+  std::cout << reverse(120) << std::endl;
+  std::cout << reverse(0) << std::endl;
+  std::cout << reverse(1534236469) << std::endl;
+  std::cout << reverse(-2147483412) << std::endl;
+}

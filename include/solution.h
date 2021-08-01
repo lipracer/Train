@@ -23,4 +23,11 @@ int lengthOfLongestSubstring(std::string s);
 
 double findMedianSortedArrays(const std::vector<int> &nums1,
                               const std::vector<int> &nums2);
+
+std::string longestPalindrome(std::string s);
+
+std::string convert(std::string s, int numRows);
+
+int reverse(int x);
+
 }
