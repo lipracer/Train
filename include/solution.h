@@ -30,4 +30,19 @@ std::string convert(std::string s, int numRows);
 
 int reverse(int x);
 
+struct TreeNode {
+  TreeNode* lhs;
+  TreeNode* rhs;
+  int idx;
+};
+typedef TreeNode* tree;
+
+void buildTree(tree *root, size_t size);
+
+int findRecentAncer(tree root, int lhs, int rhs);
+
+int myAtoi(std::string s);
+
+bool isPalindrome(int x);
+
 }

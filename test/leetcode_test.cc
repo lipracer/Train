@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <bitset>
 
 #include "solution.h"
 
@@ -78,4 +79,32 @@ TEST(LeetCodeTrain, reverse) {
   std::cout << reverse(0) << std::endl;
   std::cout << reverse(1534236469) << std::endl;
   std::cout << reverse(-2147483412) << std::endl;
+}
+
+// TEST(LeetCodeTrain, findRecentAncer) {
+//   tree mtree;
+//   buildTree(&mtree, 20);
+//   std::cout << findRecentAncer(mtree, 4, 7) << std::endl;
+// }
+
+TEST(LeetCodeTrain, myAtoi) {
+  std::cout << myAtoi("42") << std::endl;
+  std::cout << myAtoi("-42") << std::endl;
+  std::cout << myAtoi("4193 with words") << std::endl;
+  std::cout << myAtoi("words and 987") << std::endl;
+  std::cout << myAtoi("-91283472332") << std::endl;
+  std::cout << myAtoi("+1") << std::endl;
+  std::cout << myAtoi("-+1") << std::endl;
+  std::cout << myAtoi("20000000000000000000") << std::endl;
+  
+}
+
+TEST(LeetCodeTrain, isPalindrome) {
+  std::cout << isPalindrome(-121) << std::endl;
+  std::cout << isPalindrome(121) << std::endl;
+  std::cout << isPalindrome(1) << std::endl;
+  std::cout << isPalindrome(1221) << std::endl;
+  const char *p = "1234";
+  const char *n = p + 1;
+  std::cout << p - n << std::endl;
 }

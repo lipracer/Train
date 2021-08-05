@@ -6,6 +6,8 @@
 #include <iostream>
 #include <sstream>
 #include <utility>
+#include <deque>
+#include <stack>
 
 namespace Solution {
 std::vector<int> twoSum(const std::vector<int> &nums, int target) {
@@ -250,5 +252,110 @@ int reverse(int x) {
     x /= 10;
   }
   return ret;
+}
+
+void buildTree(tree *root, size_t size) {
+  if (size < 1) {
+    return;
+  }
+  auto makeNode = [](tree *root) {
+    static size_t idx = 0;
+    *root = new TreeNode();
+    (*root)->lhs = nullptr;
+    (*root)->rhs = nullptr;
+    (*root)->idx = idx++;
+  };
+  std::deque<TreeNode **> dq;
+  dq.push_back(root);
+  while (size--) {
+    auto ppnode = dq.front();
+    makeNode(ppnode);
+    dq.pop_front();
+    dq.push_back(&((*ppnode)->lhs));
+    dq.push_back(&((*ppnode)->rhs));
+  }
+}
+
+int findRecentAncer(tree root, int lhs, int rhs) {
+  std::vector<TreeNode *> st;
+  std::pair<std::vector<TreeNode *>, std::vector<TreeNode *>> lists;
+  st.push_back(root);
+  while (!st.empty()) {
+    auto cur = st.back();
+    if (st.back()->idx == lhs || st.back()->idx == rhs) {
+      if (lists.first.empty()) {
+        lists.first.assign(st.begin(), st.end());
+      } else {
+        lists.second.assign(st.begin(), st.end());
+      }
+    }
+    while (cur->lhs) {
+      st.push_back(cur->lhs);
+      cur = st.back();
+    }
+    while (cur->rhs) {
+      st.push_back(cur->rhs);
+      cur = st.back();
+    }
+    st.pop_back();
+  }
+  for (size_t i = 0; i < std::min(lists.first.size(), lists.second.size());
+       ++i) {
+    if (lists.first[i] != lists.second[i]) {
+      return lists.first[i - 1]->idx;
+    }
+  }
+  return -1;
+};
+
+int myAtoi(std::string s) {
+  auto str = s.c_str();
+  while (*str && (*str == ' ')) {
+    ++str;
+  }
+  bool is_negative = false;
+  if (*str && (*str == '-' || *str == '+')) {
+    if (*str == '-')
+      is_negative = !is_negative;
+    ++str;
+  }
+  long long int value = 0;
+  while (*str && '0' <= *str && *str <= '9') {
+    value *= 10;
+    value += *str++ - '0';
+    if (is_negative) {
+      if (value + std::numeric_limits<int>::lowest() > 0)
+        return std::numeric_limits<int>::lowest();
+    } else {
+      if (value > std::numeric_limits<int>::max())
+        return std::numeric_limits<int>::max();
+    }
+  }
+
+  if (is_negative) {
+    return -1 * value;
+  }
+  return value;
+}
+
+bool isPalindrome(int x) {
+  if (x < 0) {
+    return false;
+  }
+  char str[24] = {0};
+  char *p = str;
+  while (x) {
+    *p++ = x % 10;
+    x /= 10;
+  }
+  if (p == str)
+    return true;
+  --p;
+  char *s = str;
+  while (p > s && *s == *p) {
+    ++s;
+    --p;
+  }
+  return p <= s;
 }
 }

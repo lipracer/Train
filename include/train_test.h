@@ -35,7 +35,7 @@ TestCaseRegister UNIQUE_REG_NAME(__COUNTER__)(#Class, #Name,                   \
   \
 void LL_FUNCTION_NAME(Class, Name)(void)
 
-#define EXPECT_EQ(lhs, rhs)
+#define EXPECT_EQ(lhs, rhs) std::euqal_to(lhs, rhs)
 
 template <typename T, typename Alloc>
 std::ostream &operator<<(std::ostream &os, const std::vector<T, Alloc> &vec) {
