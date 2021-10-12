@@ -1,5 +1,3 @@
-#include "train_test.h"
-
 #include <cassert>
 #include <iostream>
 #include <vector>
@@ -7,6 +5,7 @@
 #include <bitset>
 
 #include "solution.h"
+#include "gtest/gtest.h"
 
 using namespace std;
 using namespace Solution;
@@ -18,7 +17,8 @@ TEST(OtherTrain, RoateSquareMatrix) {
 
 TEST(LeetCodeTrain, TwoNumberSum) {
   auto locs = Solution::twoSum({2, 7, 11, 15}, 9);
-  std::cout << locs << std::endl;
+  EXPECT_EQ(locs[0], 0);
+  EXPECT_EQ(locs[1], 1);
 }
 
 TEST(LeetCodeTrain, addTwoNumbers) {
