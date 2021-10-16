@@ -1,1 +1,1 @@
-从今天起开始刷LC
+LeetCode Hot100
