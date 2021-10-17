@@ -108,3 +108,11 @@ TEST(LeetCodeTrain, isPalindrome) {
   const char *n = p + 1;
   std::cout << p - n << std::endl;
 }
+
+TEST(LeetCodeTrain, IsMatch) {
+  EXPECT_FALSE(isMatch("aa", "a"));
+  EXPECT_FALSE(isMatch("aa", "a*"));
+  EXPECT_FALSE(isMatch("ab", ".*"));
+  EXPECT_FALSE(isMatch("aab", "c*a*b"));
+  EXPECT_FALSE(isMatch("mississippi", "mis*is*p*."));
+}

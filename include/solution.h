@@ -45,4 +45,6 @@ int myAtoi(std::string s);
 
 bool isPalindrome(int x);
 
+bool isMatch(const std::string& s, const std::string& p);
+
 }

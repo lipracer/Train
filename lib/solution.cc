@@ -358,4 +358,9 @@ bool isPalindrome(int x) {
   }
   return p <= s;
 }
+
+bool isMatch(const std::string& s, const std::string& p) {
+  return true;
+}
+
 }
