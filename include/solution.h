@@ -47,4 +47,5 @@ bool isPalindrome(int x);
 
 bool isMatch(const std::string& s, const std::string& p);
 
+int maxArea(const std::vector<int> &height);
 }

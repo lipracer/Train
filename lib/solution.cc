@@ -360,7 +360,26 @@ bool isPalindrome(int x) {
 }
 
 bool isMatch(const std::string& s, const std::string& p) {
-  return true;
+  return false;
 }
 
+int maxArea(const std::vector<int> &height) {
+  if (height.size() < 2) {
+    return 0;
+  }
+  auto first = height.begin();
+  auto last = height.end() - 1;
+  size_t max_area = std::distance(first, last) * std::min(*first, *last);
+  while (first != last) {
+    if (*first < *last) {
+      ++first;
+    } else {
+      --last;
+    }
+    size_t nex_area = std::distance(first, last) * std::min(*first, *last);
+    max_area = std::max(max_area, nex_area);
+    std::cout << "max_area:" << max_area << std::endl;
+  }
+  return max_area;
+}
 }

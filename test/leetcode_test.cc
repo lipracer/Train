@@ -116,3 +116,10 @@ TEST(LeetCodeTrain, IsMatch) {
   EXPECT_FALSE(isMatch("aab", "c*a*b"));
   EXPECT_FALSE(isMatch("mississippi", "mis*is*p*."));
 }
+
+TEST(LeetCodeTrain, maxArea) {
+  EXPECT_EQ(49, maxArea({1, 8, 6, 2, 5, 4, 8, 3, 7}));
+  EXPECT_EQ(1, maxArea({1, 1}));
+  EXPECT_EQ(16, maxArea({4, 3, 2, 1, 4}));
+  EXPECT_EQ(2, maxArea({1, 2, 1}));
+}
