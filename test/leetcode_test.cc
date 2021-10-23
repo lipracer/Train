@@ -123,3 +123,11 @@ TEST(LeetCodeTrain, maxArea) {
   EXPECT_EQ(16, maxArea({4, 3, 2, 1, 4}));
   EXPECT_EQ(2, maxArea({1, 2, 1}));
 }
+
+TEST(LeetCodeTrain, intToRoman) {
+  EXPECT_EQ("III", intToRoman(3));
+  EXPECT_EQ("IV", intToRoman(4));
+  EXPECT_EQ("IX", intToRoman(9));
+  EXPECT_EQ("LVIII", intToRoman(58));
+  EXPECT_EQ("MCMXCIV", intToRoman(1994));
+}

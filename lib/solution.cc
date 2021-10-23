@@ -382,4 +382,36 @@ int maxArea(const std::vector<int> &height) {
   }
   return max_area;
 }
+
+std::string intToRoman(int num) {
+  auto mul = [](int n, char c) { return std::string(n, c); };
+  if (num >= 1000) {
+    std::string result;
+    return mul(num / 1000, 'M') + intToRoman(num % 1000);
+  } else if (num >= 900) {
+    return "CM" + intToRoman(num - 900);
+  } else if (num >= 500) {
+    return 'D' + mul((num - 500) / 100, 'C') + intToRoman(num % 100);
+  } else if (num >= 400) {
+    return "CD" + intToRoman(num - 400);
+  } else if (num >= 100) {
+    return mul(num / 100, 'C') + intToRoman(num % 100);
+  } else if (num >= 90) {
+    return "XC" + intToRoman(num - 90);
+  } else if (num >= 50) {
+    return 'L' + mul((num - 50) / 10, 'X') + intToRoman(num % 10);
+  } else if (num >= 40) {
+    return "XL" + intToRoman(num - 40);
+  } else if (num >= 10) {
+    return mul(num / 10, 'X') + intToRoman(num % 10);
+  } else if (num >= 9) {
+    return "IX";
+  } else if (num >= 5) {
+    return 'V' + mul(num - 5, 'I');
+  } else if (num >= 4) {
+    return "IV";
+  } else {
+    return mul(num, 'I');
+  }
+}
 }

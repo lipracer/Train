@@ -48,4 +48,18 @@ bool isPalindrome(int x);
 bool isMatch(const std::string& s, const std::string& p);
 
 int maxArea(const std::vector<int> &height);
+
+// 执行用时：
+// 0 ms
+// , 在所有 C++ 提交中击败了
+// 100.00%
+// 的用户
+// 内存消耗：
+// 5.8 MB
+// , 在所有 C++ 提交中击败了
+// 84.96%
+// 的用户
+// 通过测试用例：
+// 3999 / 3999
+std::string intToRoman(int num);
 }
