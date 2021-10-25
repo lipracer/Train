@@ -414,4 +414,46 @@ std::string intToRoman(int num) {
     return mul(num, 'I');
   }
 }
+
+int romanToInt(const std::string &s) {
+  int result = 0;
+  auto CurValue = [](char c) {
+    switch (c) {
+      case 'I': {
+        return 1;
+      }
+      case 'V': {
+        return 5;
+      }
+      case 'X': {
+        return 10;
+      }
+      case 'L': {
+        return 50;
+      }
+      case 'C': {
+        return 100;
+      }
+      case 'D': {
+        return 500;
+      }
+      case 'M': {
+        return 1000;
+      }
+    }
+    return 0;
+  };
+  auto cur = s.rbegin();
+  int pre_value = 0;
+  while (cur != s.rend()) {
+    auto v = CurValue(*cur++);
+    if (v < pre_value) {
+      result -= v;
+    } else {
+      result += v;
+    }
+    pre_value = v; 
+  }
+  return result;
+}
 }

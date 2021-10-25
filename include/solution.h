@@ -62,4 +62,18 @@ int maxArea(const std::vector<int> &height);
 // 通过测试用例：
 // 3999 / 3999
 std::string intToRoman(int num);
+
+// 执行用时：
+// 4 ms
+// , 在所有 C++ 提交中击败了
+// 95.85%
+// 的用户
+// 内存消耗：
+// 5.9 MB
+// , 在所有 C++ 提交中击败了
+// 81.55%
+// 的用户
+// 通过测试用例：
+int romanToInt(const std::string& s);
+
 }

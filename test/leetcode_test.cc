@@ -131,3 +131,11 @@ TEST(LeetCodeTrain, intToRoman) {
   EXPECT_EQ("LVIII", intToRoman(58));
   EXPECT_EQ("MCMXCIV", intToRoman(1994));
 }
+
+TEST(LeetCodeTrain, romanToInt) {
+  EXPECT_EQ(3, romanToInt("III"));
+  EXPECT_EQ(4, romanToInt("IV"));
+  EXPECT_EQ(9, romanToInt("IX"));
+  EXPECT_EQ(58, romanToInt("LVIII"));
+  EXPECT_EQ(1994, romanToInt("MCMXCIV"));
+}
