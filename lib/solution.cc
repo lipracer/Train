@@ -456,4 +456,23 @@ int romanToInt(const std::string &s) {
   }
   return result;
 }
+
+std::string longestCommonPrefix(const std::vector<std::string> &strs) {
+  std::string result;
+  if (strs.empty()) return result;
+  result = strs[0];
+  for (size_t i = 1; i < strs.size(); ++i) {
+    auto lhs_iter = result.begin();
+    auto rhs_iter = strs[i].begin();
+    while (lhs_iter != result.end()) {
+      if (*lhs_iter != *rhs_iter) {
+        break;
+      }
+      ++lhs_iter;
+      ++rhs_iter;
+    }
+    result = result.substr(0, std::distance(result.begin(), lhs_iter));
+  }
+  return result;
+}
 }

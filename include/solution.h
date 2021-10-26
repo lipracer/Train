@@ -76,4 +76,6 @@ std::string intToRoman(int num);
 // 通过测试用例：
 int romanToInt(const std::string& s);
 
+// refine with stringView
+std::string longestCommonPrefix(const std::vector<std::string> &strs);
 }

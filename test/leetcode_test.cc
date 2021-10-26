@@ -139,3 +139,9 @@ TEST(LeetCodeTrain, romanToInt) {
   EXPECT_EQ(58, romanToInt("LVIII"));
   EXPECT_EQ(1994, romanToInt("MCMXCIV"));
 }
+
+TEST(LeetCodeTrain, longestCommonPrefix) {
+  EXPECT_EQ("fl", longestCommonPrefix({"flower", "flow", "flight"}));
+  EXPECT_EQ("", longestCommonPrefix({"dog", "racecar", "car"}));
+  EXPECT_EQ("a", longestCommonPrefix({"a"}));
+}
