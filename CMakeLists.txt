@@ -26,13 +26,14 @@ target_include_directories(LCTrain
 enable_testing()
 
 add_executable(
-    leetcode_test
+    uttest
     test/leetcode_test.cc
+    test/hot.cc
 )
 target_link_libraries(
-    leetcode_test
+    uttest
     LCTrain
     gtest_main
 )
 include(GoogleTest)
-gtest_discover_tests(leetcode_test)
+gtest_discover_tests(uttest)
