@@ -9,6 +9,8 @@
 #include <deque>
 #include <stack>
 
+using namespace type;
+
 namespace Solution {
 std::vector<int> twoSum(const std::vector<int> &nums, int target) {
   std::vector<int> result(2, 0);

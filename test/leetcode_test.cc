@@ -9,6 +9,7 @@
 
 using namespace std;
 using namespace Solution;
+using namespace type;
 
 TEST(OtherTrain, RoateSquareMatrix) {
     
