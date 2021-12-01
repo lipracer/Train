@@ -29,6 +29,7 @@ add_executable(
     uttest
     test/leetcode_test.cc
     test/hot.cc
+    test/interview.cc
 )
 target_link_libraries(
     uttest
