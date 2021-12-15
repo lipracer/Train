@@ -146,3 +146,8 @@ TEST(LeetCodeTrain, longestCommonPrefix) {
   EXPECT_EQ("", longestCommonPrefix({"dog", "racecar", "car"}));
   EXPECT_EQ("a", longestCommonPrefix({"a"}));
 }
+
+TEST(LeetCodeTrain, simplePermutation) {
+  int a[] = {1, 2, 3};
+  simplePermutationImpl(a);
+}

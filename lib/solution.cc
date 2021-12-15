@@ -477,4 +477,55 @@ std::string longestCommonPrefix(const std::vector<std::string> &strs) {
   }
   return result;
 }
+
+template <typename T>
+size_t partition_sort() {
+  
+}
+
+// give array of int, make all of left less k1, and right greate k2,
+// the reset at the middle
+void sortArray(std::vector<int>& vec, int k1, int k2) {
+  // std::ger
+}
+
+bool nextPermutation(std::vector<int> &data) {
+
+}
+// refer to: https://en.cppreference.com/w/cpp/algorithm/next_permutation
+// think:
+// sort array by less operator
+// generate the increase sequence eg. 123, 132, 213, 231, 312, 321
+// permutation array until backward order, then roate previous one and last eg. 5 9 8 7....6 swap 5 and 6
+std::vector<std::vector<int>> permutation(const std::vector<int> &data) {
+  std::vector<std::vector<int>> result;
+  // std::sort(data.begin(), data.end());
+  while (1) {
+  }
+  return std::move(result);
+}
+
+void simplePermutationImpl(ArrayRef<int> data) {
+  std::cout << data << std::endl;
+  if(data.size() == 1) {
+    return;
+  }
+  if(data.size() == 2) {
+    std::swap(data.front(), data.back());
+  }
+  simplePermutationImpl(ArrayRef<int>(data.begin() + 1, data.end()));
+  for (size_t i = 1; i < data.size(); ++i) {
+    std::swap(data[0], data[i]);
+    simplePermutationImpl(ArrayRef<int>(data.begin() + 1, data.end()));
+    std::swap(data[0], data[i]);
+  }
+}
+
+std::vector<std::vector<int>> simplePermutation(const std::vector<int> &data) {
+  std::vector<std::vector<int>> result;
+  // std::sort(data.begin(), data.end());
+  while (1) {
+  }
+  return std::move(result);
+}
 }
