@@ -34,6 +34,8 @@ bool isMatch(const std::string& s, const std::string& p);
 
 int maxArea(const std::vector<int> &height);
 
+void heapSort(type::ArrayRef<int> array);
+
 // 执行用时：
 // 0 ms
 // , 在所有 C++ 提交中击败了

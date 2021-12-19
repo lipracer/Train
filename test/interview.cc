@@ -17,6 +17,13 @@ TEST(QuitSort, sortArray) {
   std::cout << ArrayRef<int>(array) << std::endl;
 }
 
+TEST(HeapSort, sortArray) {
+  int array[] = {9, 5, 2, 6, 4, 1, 8};
+  heapSort(array);
+  std::cout << ArrayRef<int>(array) << std::endl;
+}
+
+
 template <typename T>
 struct TreeNode {
     TreeNode *left;

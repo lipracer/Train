@@ -8,6 +8,7 @@
 #include <utility>
 #include <deque>
 #include <stack>
+#include "algorithm.hpp"
 
 using namespace type;
 
@@ -586,4 +587,13 @@ bool next_permutation(BidirIt first, BidirIt last) {
   }
 }
 */
+
+void heapSort(type::ArrayRef<int> array) {
+  Train::make_heap(array.begin(), array.end());
+  std::cout << array << std::endl;
+  for (auto it = array.end(); it != array.begin() + 1; --it) {
+    Train::pop_heap(array.begin(), it);
+    std::cout << array << std::endl;
+  }
+}
 }

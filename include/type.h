@@ -1,17 +1,17 @@
 #pragma once
 
-#include <cstdlib>
 #include <algorithm>
+#include <cstdlib>
 
 namespace type {
 
 // Definition for singly-linked list.
 struct ListNode {
   int val;
-  ListNode *next;
+  ListNode* next;
   ListNode() : val(0), next(nullptr) {}
   ListNode(int x) : val(x), next(nullptr) {}
-  ListNode(int x, ListNode *next) : val(x), next(next) {}
+  ListNode(int x, ListNode* next) : val(x), next(next) {}
 };
 
 struct TreeNode {
@@ -35,7 +35,8 @@ class ArrayRef {
 
   ArrayRef(const T* data, size_type size)
       : data_(const_cast<T*>(data)), size_(size) {}
-  // ArrayRef(iterator begin, iterator end) : data_(begin), size_(std::distance(begin, end)) {}
+  // ArrayRef(iterator begin, iterator end) : data_(begin),
+  // size_(std::distance(begin, end)) {}
 
   template <size_type N>
   ArrayRef(T (&array)[N]) : ArrayRef(array, N) {}
@@ -69,10 +70,10 @@ ArrayRef<T> makeArrayRef(Argvs&&... argvs) {
 
 template <typename T>
 std::ostream& operator<<(std::ostream& os, ArrayRef<T> array) {
-  // 
+  //
   for (const auto& it : array) {
     os << it << ", ";
   }
   return os;
 }
-}
+}  // namespace type
