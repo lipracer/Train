@@ -44,6 +44,8 @@ class ArrayRef {
   ArrayRef(Iter begin, Iter end)
       : data_(&*begin), size_(std::distance(begin, end)) {}
 
+  ArrayRef(std::vector<T>& vec) : ArrayRef(vec.data(), vec.size()) {}
+
   reference front() { return *data_; }
   reference back() { return *(data_ + size_); }
 
@@ -53,10 +55,17 @@ class ArrayRef {
   size_type size() const { return size_; }
   reference operator[](size_type idx) { return *(data_ + idx); }
 
+  ArrayRef<T> slice() {}
+
  private:
   T* data_;
   size_type size_;
 };
+
+template <typename T, typename... Argvs>
+ArrayRef<T> makeArrayRef(Argvs&&... argvs) {
+  return ArrayRef<T>(std::forward<Argvs>(argvs)...);
+}
 
 template <typename T>
 std::ostream& operator<<(std::ostream& os, ArrayRef<T> array) {
@@ -64,5 +73,6 @@ std::ostream& operator<<(std::ostream& os, ArrayRef<T> array) {
   for (const auto& it : array) {
     os << it << ", ";
   }
+  return os;
 }
 }

@@ -64,8 +64,8 @@ int romanToInt(const std::string& s);
 // refine with stringView
 std::string longestCommonPrefix(const std::vector<std::string> &strs);
 
-std::vector<std::vector<int>> permutation(const std::vector<int> &data);
+void sortArray(type::ArrayRef<int> array, int k1, int k2);
 
-void simplePermutationImpl(type::ArrayRef<int> data);
+std::vector<std::vector<int>> simplePermutationImpl(type::ArrayRef<int> data);
 
 }

@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.5)
 # Set the project name
 project (LCTrain)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
 add_subdirectory(third_party/googletest)
 # set(SOURCES "lib/**.cc" "test/**.cc")

@@ -479,14 +479,33 @@ std::string longestCommonPrefix(const std::vector<std::string> &strs) {
 }
 
 template <typename T>
-size_t partition_sort() {
-  
+T partition_sort(T first, T last, decltype(*first) k) {
+  auto dfirst = first;
+  auto dlast = last;
+  std::cout << ArrayRef<int>(dfirst, dlast) << std::endl;
+  if (last - first < 2) return first;
+  --last;
+  auto pred_termination = [&]() { return first < last; };
+  while (pred_termination()) {
+    while (*first < k && pred_termination()) {
+      ++first;
+    }
+    while (*last >= k && pred_termination()) {
+      --last;
+    }
+    if (pred_termination()) {
+      std::iter_swap(first++, last--);
+      std::cout << ArrayRef<int>(dfirst, dlast) << std::endl;
+    }
+  }
+  return first;
 }
 
 // give array of int, make all of left less k1, and right greate k2,
 // the reset at the middle
-void sortArray(std::vector<int>& vec, int k1, int k2) {
-  // std::ger
+void sortArray(ArrayRef<int> array, int k1, int k2) {
+  auto middle = partition_sort(array.begin(), array.end(), k1);
+  (void)partition_sort(middle, array.end(), k2);
 }
 
 bool nextPermutation(std::vector<int> &data) {
@@ -505,27 +524,66 @@ std::vector<std::vector<int>> permutation(const std::vector<int> &data) {
   return std::move(result);
 }
 
-void simplePermutationImpl(ArrayRef<int> data) {
-  std::cout << data << std::endl;
-  if(data.size() == 1) {
-    return;
-  }
-  if(data.size() == 2) {
-    std::swap(data.front(), data.back());
-  }
-  simplePermutationImpl(ArrayRef<int>(data.begin() + 1, data.end()));
-  for (size_t i = 1; i < data.size(); ++i) {
-    std::swap(data[0], data[i]);
-    simplePermutationImpl(ArrayRef<int>(data.begin() + 1, data.end()));
-    std::swap(data[0], data[i]);
+template <class BidirIt>
+bool next_permutation(BidirIt first, BidirIt last) {
+  if (first == last) return false;
+  if (1 == last - first) return false;
+  BidirIt cur_iter = last - 1;
+  BidirIt pre_iter = last - 2;
+
+  while (true) {
+    if (*pre_iter > *cur_iter) {
+      if (pre_iter == first) return false;
+      --pre_iter;
+      --cur_iter;
+    } else {
+      if (cur_iter == last - 1) {
+        std::iter_swap(pre_iter, cur_iter);
+        return true;
+      } else {
+        auto iter = last - 1;
+        while (*iter < *pre_iter) {
+          --iter;
+        }
+        std::iter_swap(pre_iter, iter);
+        std::reverse(cur_iter, last);
+        return true;
+      }
+    }
   }
 }
 
-std::vector<std::vector<int>> simplePermutation(const std::vector<int> &data) {
+std::vector<std::vector<int>> simplePermutationImpl(type::ArrayRef<int> data) {
   std::vector<std::vector<int>> result;
-  // std::sort(data.begin(), data.end());
-  while (1) {
-  }
+  std::sort(data.begin(), data.end());
+  do {
+    result.emplace_back(data.begin(), data.end());
+  } while (::Solution::next_permutation(data.begin(), data.end()));
   return std::move(result);
 }
+/*
+template <class BidirIt>
+bool next_permutation(BidirIt first, BidirIt last) {
+  if (first == last) return false;
+  BidirIt i = last;
+  if (first == --i) return false;
+
+  while (true) {
+    BidirIt i1, i2;
+
+    i1 = i;
+    if (*--i < *i1) {
+      i2 = last;
+      while (!(*i < *--i2));
+      std::iter_swap(i, i2);
+      std::reverse(i1, last);
+      return true;
+    }
+    if (i == first) {
+      std::reverse(first, last);
+      return false;
+    }
+  }
+}
+*/
 }

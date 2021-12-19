@@ -149,5 +149,8 @@ TEST(LeetCodeTrain, longestCommonPrefix) {
 
 TEST(LeetCodeTrain, simplePermutation) {
   int a[] = {1, 2, 3};
-  simplePermutationImpl(a);
+  auto ret = simplePermutationImpl(a);
+  decltype(ret) expect_value = {{1, 2, 3}, {1, 3, 2}, {2, 1, 3},
+                                {2, 3, 1}, {3, 1, 2}, {3, 2, 1}};
+  EXPECT_EQ(ret, expect_value);
 }

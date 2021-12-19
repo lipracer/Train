@@ -11,8 +11,10 @@ using namespace std;
 using namespace Solution;
 using namespace type;
 
-TEST(QuitSort, sort) {
-    
+TEST(QuitSort, sortArray) {
+  int array[] = {9, 5, 2, 6, 4, 1, 8};
+  sortArray(array, 3, 7);
+  std::cout << ArrayRef<int>(array) << std::endl;
 }
 
 template <typename T>
