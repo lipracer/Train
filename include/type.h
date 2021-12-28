@@ -2,6 +2,8 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <vector>
+#include <iostream>
 
 namespace type {
 
@@ -56,7 +58,21 @@ class ArrayRef {
   size_type size() const { return size_; }
   reference operator[](size_type idx) { return *(data_ + idx); }
 
-  ArrayRef<T> slice() {}
+  ArrayRef<T> slice(size_t start) const {
+    return ArrayRef<T>(data_ + start, size() - start);
+  }
+
+  ArrayRef<T> slice(size_t start, size_t size) const {
+    return ArrayRef<T>(data_ + start, size);
+  }
+
+  ArrayRef<T> drop_front(size_t S) const {
+    return ArrayRef<T>(data_ + S, size() - S);
+  }
+
+  ArrayRef<T> drop_back(size_t S) const {
+    return ArrayRef<T>(data_, size() - S);
+  }
 
  private:
   T* data_;

@@ -147,10 +147,30 @@ TEST(LeetCodeTrain, longestCommonPrefix) {
   EXPECT_EQ("a", longestCommonPrefix({"a"}));
 }
 
+void permutationArrayImpl(ArrayRef<int> array, std::function<void(void)> func) {
+  if (1 == array.size()) {
+    return;
+  }
+  permutationArrayImpl(array.drop_front(1), func);
+  for (size_t i = 1; i < array.size(); ++i) {
+    std::swap(array[0], array[i]);
+    func();
+    permutationArrayImpl(array.drop_front(1), func);
+    std::swap(array[0], array[i]);
+  }
+}
+
+void permutationArray(ArrayRef<int> array) {
+  auto printer = [=]() { std::cout << array << std::endl; };
+  printer();
+  permutationArrayImpl(array, printer);
+}
+
 TEST(LeetCodeTrain, simplePermutation) {
-  int a[] = {1, 2, 3};
-  auto ret = simplePermutationImpl(a);
-  decltype(ret) expect_value = {{1, 2, 3}, {1, 3, 2}, {2, 1, 3},
-                                {2, 3, 1}, {3, 1, 2}, {3, 2, 1}};
-  EXPECT_EQ(ret, expect_value);
+  int a[] = {1, 2, 3, 4};
+  // auto ret = simplePermutationImpl(a);
+  // decltype(ret) expect_value = {{1, 2, 3}, {1, 3, 2}, {2, 1, 3},
+  //                               {2, 3, 1}, {3, 1, 2}, {3, 2, 1}};
+  // EXPECT_EQ(ret, expect_value);
+  permutationArray(a);
 }
