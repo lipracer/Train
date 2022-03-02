@@ -3,8 +3,11 @@
 # $ cmake --version
 cmake_minimum_required(VERSION 3.5)
 
+set(CMAKE_C_COMPILER "/usr/bin/gcc-7")
+set(CMAKE_CXX_COMPILER "/usr/bin/g++-7")
+
 # Set the project name
-project (LCTrain)
+project (Train)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -14,11 +17,11 @@ add_subdirectory(third_party/googletest)
 FILE(GLOB SOURCES "lib/*.cc")
 
 # Add an executable
-add_library(LCTrain ${SOURCES})
+add_library(Train ${SOURCES})
 
 # Set the directories that should be included in the build command for this target
 # when running g++ these will be included as -I/directory/path/
-target_include_directories(LCTrain
+target_include_directories(Train
     PUBLIC 
         ${PROJECT_SOURCE_DIR}/include
 )
@@ -28,12 +31,12 @@ enable_testing()
 add_executable(
     uttest
     test/leetcode_test.cc
-    test/hot.cc
+    test/hot_test.cc
     test/interview.cc
 )
 target_link_libraries(
     uttest
-    LCTrain
+    Train
     gtest_main
 )
 include(GoogleTest)

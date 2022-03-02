@@ -1,3 +1,4 @@
+闲来无事练练手
 ```
 cd build cmake ..
 or

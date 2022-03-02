@@ -8,6 +8,8 @@
 
 #include "gtest/gtest.h"
 
+#include "algorithm.hpp"
+
 namespace {
 
 typedef struct SListNode {
@@ -89,4 +91,10 @@ TEST(ListTest, cycle) {
 
   destory(slist, [](void* data) { delete reinterpret_cast<int*>(data); });
   destory(clist, [](void* data) { delete reinterpret_cast<int*>(data); });
+}
+
+TEST(shotestpath, dijkstra) {
+  using Graph = type::Grahp<int>;
+  Graph graph;
+  Train::dijkstra(graph, graph.begin());
 }
