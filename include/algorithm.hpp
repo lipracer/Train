@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <type_traits>
+#include <unordered_set>
 #include <unordered_map>
 
 #include "type.h"
@@ -94,21 +95,29 @@ void quickSort() {}
 template <typename T>
 void dijkstra(const type::Grahp<T>& graph,
               typename type::Grahp<T>::const_node_iterator start) {
-  using node_ptr = const typename type::Grahp<T>::GraphNode*;
+  using node_ptr = typename type::Grahp<T>::const_node_ptr;
   using weight_type = typename type::Grahp<T>::weight_type;
-  std::unordered_map<node_ptr, weight_type> visited;
-  visited.insert(std::make_pair(&*start, 0));
-  std::vector<std::pair<node_ptr, weight_type>> remained;
+
+  std::unordered_set<node_ptr> visited;
+  std::unordered_set<node_ptr> remained;
+  std::unordered_map<node_ptr, weight_type> weight_map;
+
   for (auto iter = graph.begin(); iter != graph.end(); ++iter) {
-    remained.emplace_back(&*iter, std::numeric_limits<weight_type>::max());
+    remained.emplace(&*iter);
+    weight_map.emplace(&*iter, std::numeric_limits<weight_type>::max());
   }
 
   while (!remained.empty()) {
-    auto min = std::min_element(
-        remained.begin(), remained.end(),
-        [](auto lhs, auto rhs) { return lhs.second < rhs.second; });
+    auto min = std::min_element(remained.begin(), remained.end(),
+                                [&weight_map](auto lhs, auto rhs) {
+                                  return weight_map[lhs] < weight_map[rhs];
+                                });
     visited.insert(*min);
-    for (auto node : min->first->adjacency_list) {
+    for (typename type::Grahp<T>::GraphEdge edge : (*min)->adjacency_list) {
+      node_ptr adj_node = edge.adjacency_node;
+      if (edge.weight + weight_map[(*min)] < weight_map[adj_node]) {
+        weight_map[adj_node] = edge.weight + weight_map[(*min)];
+      }
     }
     remained.erase(min);
   }

@@ -27,51 +27,59 @@ typedef TreeNode* tree;
 
 template <typename Node, typename Alloc = void>
 class Grahp {
- public:
-  using weight_type = size_t;
-  struct GraphEdge {
-    weight_type weight;
-    struct GraphNode* adjacency_node;
-  };
+public:
+	using weight_type = size_t;
+  struct GraphNode;
+	struct GraphEdge {
+		weight_type weight;
+		GraphNode* adjacency_node;
+	};
 
-  struct GraphNode {
-    Node data;
-    std::list<GraphEdge> adjacency_list;
-  };
+	struct GraphNode {
+		Node data;
+		std::list<GraphEdge> adjacency_list;
+		GraphNode(const Node& n) : data(n) {}
+	};
 
-  using NodeContainer = std::vector<GraphNode>;
-  using node_iterator = typename NodeContainer::iterator;
-  using const_node_iterator = typename NodeContainer::const_iterator;
+	using NodeContainer = std::vector<GraphNode>;
+	using node_iterator = typename NodeContainer::iterator;
+	using const_node_iterator = typename NodeContainer::const_iterator;
+  using node_ptr = GraphNode*;
+  using const_node_ptr = const GraphNode*;
 
-  GraphNode& addNode(Node&& data) {
-    nodes.emplace_back(GraphEdge{std::forward<Node>(data, {})});
-    return nodes.back();
-  }
-  void addEdge(GraphNode* lhs, GraphNode* rhs, weight_type weight) {
-    lhs->adjacency_list.push_back(GraphEdge{.weight = weight, rhs});
-    rhs->adjacency_list.push_back(GraphEdge{.weight = weight, lhs});
-  }
+	size_t addNode(const Node& data) {
+		nodes.emplace_back(data);
+		return nodes.size() - 1;
+	}
+	void addEdge(GraphNode* lhs, GraphNode* rhs, weight_type weight) {
+		lhs->adjacency_list.push_back(GraphEdge{  weight, rhs });
+		rhs->adjacency_list.push_back(GraphEdge{  weight, lhs });
+	}
 
-  const auto begin() const { return nodes.begin(); }
-  const auto end() const { return nodes.end(); }
+	const auto begin() const { return nodes.begin(); }
+	const auto end() const { return nodes.end(); }
 
-  auto begin() { return nodes.begin(); }
-  auto end() { return nodes.end(); }
+	auto begin() { return nodes.begin(); }
+	auto end() { return nodes.end(); }
 
-  std::string toString() const {
-    std::stringstream ss;
-    for (const auto& node : nodes) {
-      ss << "data:" << node.data << " adjacency list:";
-      for (auto n : node.adjacency_list) {
-        ss << n->data << " ";
-      }
-      ss << "\n";
-    }
-    return ss.str();
-  }
+	GraphNode& operator[](size_t idx) {
+		return nodes[idx];
+	}
 
- private:
-  NodeContainer nodes;
+	std::string toString() const {
+		std::stringstream ss;
+		for (const auto& node : nodes) {
+			ss << "data:" << node.data << " adjacency list:";
+			for (auto n : node.adjacency_list) {
+				ss << n->data << " ";
+			}
+			ss << "\n";
+		}
+		return ss.str();
+	}
+
+private:
+	NodeContainer nodes;
 };
 
 // simple implement ArrayRef remove const
