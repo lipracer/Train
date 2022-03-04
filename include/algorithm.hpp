@@ -92,6 +92,14 @@ void mergeSort(T fisrst, T last, CMP cmp) {
 template <typename T>
 void quickSort() {}
 
+/* description: 1. we build two set unvisited and visited
+ * 2. we assign all element's weight infinity in unvisited and
+ * assign start element's weight with 0
+ * 3. traverse all unvisited and find the min element's weight
+ * 4. update all min element's adjacency node iff edge(weight)
+ * + nin(weight) < adjacency_node(weight)
+ * 5 repeat 4-5 until unvisited set is empty
+ **/
 template <typename T>
 void dijkstra(const type::Grahp<T>& graph,
               typename type::Grahp<T>::const_node_iterator start) {
