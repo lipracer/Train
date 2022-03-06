@@ -8,8 +8,8 @@
 #include "gtest/gtest.h"
 
 using namespace std;
-using namespace Solution;
-using namespace type;
+using namespace lskd;
+using namespace lskd;
 
 TEST(OtherTrain, RoateSquareMatrix) {
     
@@ -17,7 +17,7 @@ TEST(OtherTrain, RoateSquareMatrix) {
 
 
 TEST(LeetCodeTrain, TwoNumberSum) {
-  auto locs = Solution::twoSum({2, 7, 11, 15}, 9);
+  auto locs = twoSum({2, 7, 11, 15}, 9);
   EXPECT_EQ(locs[0], 0);
   EXPECT_EQ(locs[1], 1);
 }

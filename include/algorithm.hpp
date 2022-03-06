@@ -5,7 +5,7 @@
 
 #include "type.h"
 
-namespace Train {
+namespace lskd {
 
 inline size_t PARENT_INDEX(size_t idx) { return (idx - 1) >> 1; }
 inline size_t LNODE_INDEX(size_t idx) { return (idx << 1) + 1; }
@@ -40,7 +40,7 @@ void pop_heap(T first, T last, CMP cmp) {
 
 template <typename T>
 void pop_heap(T first, T last) {
-  ::Train::pop_heap(first, last, std::less<decltype(*first)>());
+  ::lskd::pop_heap(first, last, std::less<decltype(*first)>());
 }
 
 template <typename T, typename CMP>
@@ -62,7 +62,7 @@ void push_heap(T first, T last, CMP cmp) {
 
 template <typename T>
 void push_heap(T first, T last) {
-  ::Train::push_heap(first, last, std::less<decltype(*first)>());
+  ::lskd::push_heap(first, last, std::less<decltype(*first)>());
 }
 
 template <typename T, typename CMP>
@@ -74,13 +74,13 @@ void make_heap(T first, T last, CMP cmp) {
   auto it = first;
   std::advance(it, 2);
   for (; it != last; ++it) {
-    ::Train::push_heap(first, it);
+    push_heap(first, it);
   }
 }
 
 template <typename T>
 void make_heap(T first, T last) {
-  ::Train::make_heap(first, last, std::less<decltype(*first)>());
+  ::lskd::make_heap(first, last, std::less<decltype(*first)>());
 }
 
 
@@ -101,10 +101,10 @@ void quickSort() {}
  * 5 repeat 4-5 until unvisited set is empty
  **/
 template <typename T>
-void dijkstra(const type::Grahp<T>& graph,
-              typename type::Grahp<T>::const_node_iterator start) {
-  using node_ptr = typename type::Grahp<T>::const_node_ptr;
-  using weight_type = typename type::Grahp<T>::weight_type;
+void dijkstra(const Grahp<T> &graph,
+              typename Grahp<T>::const_node_iterator start) {
+  using node_ptr = typename Grahp<T>::const_node_ptr;
+  using weight_type = typename Grahp<T>::weight_type;
 
   std::unordered_set<node_ptr> visited;
   std::unordered_set<node_ptr> remained;
@@ -121,7 +121,7 @@ void dijkstra(const type::Grahp<T>& graph,
                                   return weight_map[lhs] < weight_map[rhs];
                                 });
     visited.insert(*min);
-    for (typename type::Grahp<T>::GraphEdge edge : (*min)->adjacency_list) {
+    for (typename Grahp<T>::GraphEdge edge : (*min)->adjacency_list) {
       node_ptr adj_node = edge.adjacency_node;
       if (edge.weight + weight_map[(*min)] < weight_map[adj_node]) {
         weight_map[adj_node] = edge.weight + weight_map[(*min)];
@@ -131,4 +131,6 @@ void dijkstra(const type::Grahp<T>& graph,
   }
 }
 
-}  // namespace Train
+template <typename T> void topologicSort(Grahp<T> &graph);
+
+} // namespace lskd

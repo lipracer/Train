@@ -10,9 +10,7 @@
 #include <stack>
 #include "algorithm.hpp"
 
-using namespace type;
-
-namespace Solution {
+namespace lskd {
 std::vector<int> twoSum(const std::vector<int> &nums, int target) {
   std::vector<int> result(2, 0);
   std::unordered_map<int, size_t> map;
@@ -554,12 +552,12 @@ bool next_permutation(BidirIt first, BidirIt last) {
   }
 }
 
-std::vector<std::vector<int>> simplePermutationImpl(type::ArrayRef<int> data) {
+std::vector<std::vector<int>> simplePermutationImpl(ArrayRef<int> data) {
   std::vector<std::vector<int>> result;
   std::sort(data.begin(), data.end());
   do {
     result.emplace_back(data.begin(), data.end());
-  } while (::Solution::next_permutation(data.begin(), data.end()));
+  } while (next_permutation(data.begin(), data.end()));
   return std::move(result);
 }
 /*
@@ -588,12 +586,12 @@ bool next_permutation(BidirIt first, BidirIt last) {
 }
 */
 
-void heapSort(type::ArrayRef<int> array) {
-  Train::make_heap(array.begin(), array.end());
+void heapSort(ArrayRef<int> array) {
+  make_heap(array.begin(), array.end());
   std::cout << array << std::endl;
   for (auto it = array.end(); it != array.begin() + 1; --it) {
-    Train::pop_heap(array.begin(), it);
+    pop_heap(array.begin(), it);
     std::cout << array << std::endl;
   }
 }
-}
+} // namespace lskd

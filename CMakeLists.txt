@@ -12,6 +12,7 @@ project (Train)
 set(CMAKE_CXX_STANDARD 14)
 
 add_subdirectory(third_party/googletest)
+add_subdirectory(third_party/benchmark)
 # set(SOURCES "lib/**.cc" "test/**.cc")
 
 FILE(GLOB SOURCES "lib/*.cc")
@@ -38,6 +39,18 @@ target_link_libraries(
     uttest
     Train
     gtest_main
+    
 )
 include(GoogleTest)
 gtest_discover_tests(uttest)
+
+add_executable(
+    Benchmark
+    test/benchmark/algorithm.cc
+)
+
+target_link_libraries(
+    Benchmark
+    benchmark::benchmark
+    gtest_main
+)

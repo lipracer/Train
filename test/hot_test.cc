@@ -94,7 +94,7 @@ TEST(ListTest, cycle) {
 }
 
 TEST(shotestpath, dijkstra) {
-  using Graph = type::Grahp<int>;
+  using Graph = lskd::Grahp<int>;
   Graph graph;
-  Train::dijkstra(graph, graph.begin());
+  lskd::dijkstra(graph, graph.begin());
 }

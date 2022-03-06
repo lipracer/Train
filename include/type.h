@@ -7,7 +7,7 @@
 #include <sstream>
 #include <iostream>
 
-namespace type {
+namespace lskd {
 
 // Definition for singly-linked list.
 struct ListNode {
@@ -29,21 +29,23 @@ template <typename Node, typename Alloc = void>
 class Grahp {
 public:
 	using weight_type = size_t;
-  struct GraphNode;
-	struct GraphEdge {
-		weight_type weight;
-		GraphNode* adjacency_node;
-	};
+        template <typename T> using adjacency_container = std::list<T>;
 
-	struct GraphNode {
-		Node data;
-		std::list<GraphEdge> adjacency_list;
-		GraphNode(const Node& n) : data(n) {}
-	};
+        struct GraphNode;
+        struct GraphEdge {
+          weight_type weight;
+          GraphNode *adjacency_node;
+        };
 
-	using NodeContainer = std::vector<GraphNode>;
-	using node_iterator = typename NodeContainer::iterator;
-	using const_node_iterator = typename NodeContainer::const_iterator;
+        struct GraphNode {
+          Node data;
+          std::vector<GraphEdge> adjacency_list;
+          GraphNode(const Node &n) : data(n) {}
+        };
+
+        using NodeContainer = std::list<GraphNode>;
+        using node_iterator = typename NodeContainer::iterator;
+        using const_node_iterator = typename NodeContainer::const_iterator;
   using node_ptr = GraphNode*;
   using const_node_ptr = const GraphNode*;
 
@@ -151,4 +153,4 @@ std::ostream& operator<<(std::ostream& os, ArrayRef<T> array) {
   }
   return os;
 }
-}  // namespace type
+} // namespace lskd
