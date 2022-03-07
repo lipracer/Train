@@ -5,6 +5,7 @@
 #include <vector>
 #include <list>
 #include <sstream>
+#include <memory>
 #include <iostream>
 
 namespace lskd {
@@ -27,61 +28,51 @@ typedef TreeNode* tree;
 
 template <typename Node, typename Alloc = void>
 class Grahp {
-public:
-	using weight_type = size_t;
-        template <typename T> using adjacency_container = std::list<T>;
-
-        struct GraphNode;
-        struct GraphEdge {
-          weight_type weight;
-          GraphNode *adjacency_node;
-        };
-
-        struct GraphNode {
-          Node data;
-          std::vector<GraphEdge> adjacency_list;
-          GraphNode(const Node &n) : data(n) {}
-        };
-
-        using NodeContainer = std::list<GraphNode>;
-        using node_iterator = typename NodeContainer::iterator;
-        using const_node_iterator = typename NodeContainer::const_iterator;
+ public:
+  using weight_type = size_t;
+  struct GraphNode;
+  struct GraphEdge {
+    weight_type weight;
+    GraphNode* adjacency_node;
+  };
+  using adjacency_container = std::vector<GraphEdge>;
+  using NodeContainer = std::list<GraphNode*>;
+  using node_iterator = typename NodeContainer::iterator;
+  using const_node_iterator = typename NodeContainer::const_iterator;
   using node_ptr = GraphNode*;
   using const_node_ptr = const GraphNode*;
 
-	size_t addNode(const Node& data) {
-		nodes.emplace_back(data);
-		return nodes.size() - 1;
-	}
-	void addEdge(GraphNode* lhs, GraphNode* rhs, weight_type weight) {
-		lhs->adjacency_list.push_back(GraphEdge{  weight, rhs });
-		rhs->adjacency_list.push_back(GraphEdge{  weight, lhs });
-	}
+  struct GraphNode {
+    Node data;
+    std::vector<GraphEdge> inputs;
+    std::vector<GraphEdge> outputs;
+    Grahp* graph_;
+    Grahp* getGraph() { return graph_; }
+    void setInputs() const;
+    void setOutputs() const;
+    std::vector<GraphEdge> ajacencyList() const {
+      std::vector<GraphEdge> adjacency_list;
+      adjacency_list.insert(adjacency_list.end(), inputs.begin(), inputs.end());
+      adjacency_list.insert(adjacency_list.end(), outputs.begin(),
+                            outputs.end());
+      return adjacency_list;
+    }
+  };
 
-	const auto begin() const { return nodes.begin(); }
-	const auto end() const { return nodes.end(); }
+  node_ptr addNode(const Node& data);
 
-	auto begin() { return nodes.begin(); }
-	auto end() { return nodes.end(); }
+  void addEdge(GraphNode* lhs, GraphNode* rhs, weight_type weight);
 
-	GraphNode& operator[](size_t idx) {
-		return nodes[idx];
-	}
+  const auto begin() const { return nodes.begin(); }
+  const auto end() const { return nodes.end(); }
 
-	std::string toString() const {
-		std::stringstream ss;
-		for (const auto& node : nodes) {
-			ss << "data:" << node.data << " adjacency list:";
-			for (auto n : node.adjacency_list) {
-				ss << n->data << " ";
-			}
-			ss << "\n";
-		}
-		return ss.str();
-	}
+  auto begin() { return nodes.begin(); }
+  auto end() { return nodes.end(); }
 
-private:
-	NodeContainer nodes;
+  std::string toString() const;
+
+ private:
+  NodeContainer nodes;
 };
 
 // simple implement ArrayRef remove const

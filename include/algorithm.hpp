@@ -111,8 +111,8 @@ void dijkstra(const Grahp<T> &graph,
   std::unordered_map<node_ptr, weight_type> weight_map;
 
   for (auto iter = graph.begin(); iter != graph.end(); ++iter) {
-    remained.emplace(&*iter);
-    weight_map.emplace(&*iter, std::numeric_limits<weight_type>::max());
+    remained.emplace(*iter);
+    weight_map.emplace(*iter, std::numeric_limits<weight_type>::max());
   }
 
   while (!remained.empty()) {
@@ -121,7 +121,7 @@ void dijkstra(const Grahp<T> &graph,
                                   return weight_map[lhs] < weight_map[rhs];
                                 });
     visited.insert(*min);
-    for (typename Grahp<T>::GraphEdge edge : (*min)->adjacency_list) {
+    for (typename Grahp<T>::GraphEdge edge : (*min)->ajacencyList()) {
       node_ptr adj_node = edge.adjacency_node;
       if (edge.weight + weight_map[(*min)] < weight_map[adj_node]) {
         weight_map[adj_node] = edge.weight + weight_map[(*min)];
