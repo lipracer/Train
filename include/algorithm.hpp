@@ -131,6 +131,27 @@ void dijkstra(const Grahp<T> &graph,
   }
 }
 
-template <typename T> void topologicSort(Grahp<T> &graph);
+template <typename T>
+void topologicSort(Grahp<T> &graph) {
+  using node_ptr = typename Grahp<T>::const_node_ptr;
+  std::vector<node_ptr> stack;
+  std::unordered_set<node_ptr> visited;
+  std::function<void(node_ptr)> pushNode;
+  pushNode = [&](node_ptr node) {
+    for (auto input : node->inputs()) {
+      if (visited.end() == visited.find(node)) {
+        pushNode(input);
+      }
+    }
+    stack.push(node);
+    visited.insert(node);
+  };
+  for (const auto &node : graph) {
+    if (visited.end() != visited.find(node)) {
+      continue;
+    }
+    pushNode(node);
+  }
+}
 
 } // namespace lskd

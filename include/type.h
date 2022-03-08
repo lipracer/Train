@@ -69,6 +69,11 @@ class Grahp {
   auto begin() { return nodes.begin(); }
   auto end() { return nodes.end(); }
 
+  void insert(const_node_ptr pos, const_node_ptr value) {
+    const_node_iterator pos_iterator(pos);
+    nodes.insert(pos, value);
+  }
+
   std::string toString() const;
 
  private:
