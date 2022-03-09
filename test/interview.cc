@@ -6,6 +6,7 @@
 
 #include "solution.h"
 #include "gtest/gtest.h"
+#include "algorithm.hpp"
 
 using namespace std;
 using namespace lskd;
@@ -14,6 +15,13 @@ TEST(QuitSort, sortArray) {
   int array[] = {9, 5, 2, 6, 4, 1, 8};
   sortArray(array, 3, 7);
   std::cout << ArrayRef<int>(array) << std::endl;
+}
+
+TEST(QuitSort, quickSortArray) {
+  std::vector<int> array = {9, 5, 2, 6, 4, 1, 8};
+  quickSort(array.begin(), array.end());
+  std::cout << ArrayRef<int>(array) << std::endl;
+  // std::sort;
 }
 
 TEST(HeapSort, sortArray) {

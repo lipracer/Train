@@ -481,7 +481,6 @@ template <typename T>
 T partition_sort(T first, T last, decltype(*first) k) {
   auto dfirst = first;
   auto dlast = last;
-  std::cout << ArrayRef<int>(dfirst, dlast) << std::endl;
   if (last - first < 2) return first;
   --last;
   auto pred_termination = [&]() { return first < last; };
@@ -494,7 +493,6 @@ T partition_sort(T first, T last, decltype(*first) k) {
     }
     if (pred_termination()) {
       std::iter_swap(first++, last--);
-      std::cout << ArrayRef<int>(dfirst, dlast) << std::endl;
     }
   }
   return first;

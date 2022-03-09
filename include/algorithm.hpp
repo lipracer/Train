@@ -2,6 +2,9 @@
 #include <type_traits>
 #include <unordered_set>
 #include <unordered_map>
+#include <iterator>
+#include <functional>
+#include <iostream>
 
 #include "type.h"
 
@@ -89,8 +92,38 @@ void mergeSort(T fisrst, T last, CMP cmp) {
 
 }
 
+template <typename T, typename CMP>
+T partition(T first, T last, CMP cmp) {
+  T pre = first - 1;
+  auto mid = *first;
+  while (first < last) {
+    if (cmp(*first, mid)) {
+      ++pre;
+      std::iter_swap(pre, first);
+    }
+    ++first;
+  }
+  return ++pre;
+}
+
 template <typename T>
-void quickSort() {}
+using LegalIterType = typename std::enable_if<
+    std::is_same<typename std::iterator_traits<T>::iterator_category,
+                 std::random_access_iterator_tag>::value,
+    void>::type;
+
+template <typename T, typename CMP, typename = LegalIterType<T>>
+void quickSort(T first, T last, CMP cmp) {
+  if (first >= last - 1) return;
+  T mid = ::lskd::partition(first, last, cmp);
+  quickSort(first, mid - 1, cmp);
+  quickSort(mid + 1, last, cmp);
+}
+
+template <typename T, typename = LegalIterType<T>>
+void quickSort(T first, T last) {
+  quickSort(first, last, std::less<decltype(*first)>());
+}
 
 /* description: 1. we build two set unvisited and visited
  * 2. we assign all element's weight infinity in unvisited and
